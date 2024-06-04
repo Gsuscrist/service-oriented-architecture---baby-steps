@@ -10,8 +10,10 @@ app.use(express.json())
 
 app.get('/hello-world',(req, res)=>{
     res.status(200).send({
-        status:"success",
-        message:"Hello mr Gsus"
+        status:"Success",
+        data:[],
+        message:"Hello mr Gsus",
+
     })
 })
 
