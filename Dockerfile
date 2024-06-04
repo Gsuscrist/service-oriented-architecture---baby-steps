@@ -11,8 +11,8 @@ COPY src ./src
 # Instala las dependencias de tu aplicación
 RUN npm install
 
-# Expone el puerto 8080 en el contenedor
-EXPOSE 8080
+# Expone el puerto 8081 en el contenedor
+EXPOSE 8081
 
 # Comando para ejecutar tu aplicación cuando se inicie el contenedor
 CMD ["node", "src/main.js"]
