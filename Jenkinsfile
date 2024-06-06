@@ -1,14 +1,11 @@
 pipeline {
     agent any
+
     environment {
         DOCKER_IMAGE = 'soa-baby-steps'
     }
+
     stages {
-        stage('Checkout') {
-            steps {
-                git 'https://github.com/Gsuscrist/service-oriented-architecture---baby-steps.git'
-            }
-        }
         stage('Build') {
             steps {
                 script {
@@ -26,13 +23,15 @@ pipeline {
                 }
             }
         }
-    }
-    post {
-        always {
-            script {
-                docker.image(DOCKER_IMAGE).inside {
-                    sh 'npm cache clean --force'
-                    sh 'rm -rf node_modules'
+        stage('Deploy') {
+            steps {
+                script {
+                    // Ensure any previous container is stopped and removed
+                    sh 'docker stop soa-baby-steps || true'
+                    sh 'docker rm soa-baby-steps || true'
+
+                    // Run the new container
+                    docker.image(DOCKER_IMAGE).run('-d -p 8001:8001 --name soa-baby-steps')
                 }
             }
         }
