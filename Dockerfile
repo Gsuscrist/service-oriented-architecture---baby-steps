@@ -1,14 +1,16 @@
 # Usa una imagen base de Node.js
 FROM node:latest
 
-# Copia los archivos necesarios para instalar las dependencias
+# Establece el directorio de trabajo dentro del contenedor
+WORKDIR /usr/src/app
+
+# Copia los archivos necesarios para tu aplicación
 COPY package*.json ./
+COPY src ./src
+COPY test ./test
 
 # Instala las dependencias de tu aplicación
 RUN npm install
-
-# Copia el resto de los archivos de tu aplicación
-COPY . /usr/src/app
 
 # Expone el puerto 8081 en el contenedor
 EXPOSE 8081
