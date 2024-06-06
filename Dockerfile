@@ -7,7 +7,7 @@ WORKDIR /usr/src/app
 # Copia los archivos necesarios para tu aplicación
 COPY package*.json ./
 # Instala las dependencias de tu aplicación
-#RUN npm install
+RUN npm install
 
 COPY . .
 

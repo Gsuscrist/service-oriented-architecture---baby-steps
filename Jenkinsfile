@@ -17,6 +17,7 @@ pipeline {
             steps {
                 script {
                     docker.image(DOCKER_IMAGE).inside {
+                        sh 'sudo chown -R 111:114 "/.npm'
                         sh 'npm install'
                         sh 'npm test'
                     }
