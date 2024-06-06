@@ -8,7 +8,7 @@ COPY package*.json ./
 RUN npm install
 
 # Copia el resto de los archivos de tu aplicación
-COPY . .
+COPY . /usr/src/app
 
 # Expone el puerto 8081 en el contenedor
 EXPOSE 8081
