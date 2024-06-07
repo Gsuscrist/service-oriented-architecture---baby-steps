@@ -26,7 +26,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
-                    docker.image(DOCKER_IMAGE).run('-d -p 8001:8001')
+                    docker.image(DOCKER_IMAGE).run('-p 8001:8001')
                 }
             }
         }
