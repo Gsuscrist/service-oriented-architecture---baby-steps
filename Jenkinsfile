@@ -18,7 +18,7 @@ pipeline {
                 script {
                     docker.image(DOCKER_IMAGE).inside('-u root') {
                         sh 'npm install --unsafe-perm'
-                        sh 'npm test'
+                        sh 'npm run test'
                     }
                 }
             }
