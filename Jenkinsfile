@@ -16,9 +16,8 @@ pipeline {
         stage('Test') {
             steps {
                 script {
-                    docker.image(DOCKER_IMAGE).inside {
-                        sh 'sudo chown -R 111:114 /.npm'
-                        sh 'npm install'
+                    docker.image(DOCKER_IMAGE).inside('-u root') {
+                        sh 'npm install --unsafe-perm'
                         sh 'npm test'
                     }
                 }
@@ -27,12 +26,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
-                    // Ensure any previous container is stopped and removed
-                    sh 'docker stop soa-baby-steps || true'
-                    sh 'docker rm soa-baby-steps || true'
-
-                    // Run the new container
-                    docker.image(DOCKER_IMAGE).run('-d -p 8001:8001 --name soa-baby-steps')
+                    docker.image(DOCKER_IMAGE).run('-d -p 8001:8001')
                 }
             }
         }
